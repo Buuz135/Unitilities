@@ -1,29 +1,33 @@
 package com.buuz135.unitilities;
 
-import net.minecraft.block.Block;
+import com.buuz135.unitilities.decorative.vertical.VerticalSlabResourceType;
+import com.buuz135.unitilities.generators.UnitilitiesBlockstateGenerator;
+import com.hrznstudio.titanium.material.ResourceRegistry;
+import com.hrznstudio.titanium.module.ModuleController;
 import net.minecraft.block.Blocks;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.stream.Collectors;
-
 @Mod("unitilities")
-public class Unitilities {
+public class Unitilities extends ModuleController {
 
     private static final Logger LOGGER = LogManager.getLogger();
+    public static VerticalSlabResourceType VERTICAL_SLAB = new VerticalSlabResourceType();
+
+    static {
+        ResourceRegistry.getOrCreate("oak").withProperties(VERTICAL_SLAB, new VerticalSlabResourceType.Properties(Blocks.OAK_PLANKS)).add(VERTICAL_SLAB);
+    }
 
     public Unitilities() {
+
+    }
+
+    @Override
+    protected void initModules() {
 
     }
 
@@ -35,4 +39,9 @@ public class Unitilities {
 
     }
 
+    @Override
+    public void addDataProvider(GatherDataEvent event) {
+        event.getGenerator().addProvider(new UnitilitiesBlockstateGenerator(event.getGenerator(), event.getExistingFileHelper()));
+        super.addDataProvider(event);
+    }
 }

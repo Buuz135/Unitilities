@@ -1,0 +1,60 @@
+{
+  "forge_marker": 1,
+  "default": {
+    "textures": {
+      "bottom": "block/oak_planks",
+      "top": "block/oak_planks",
+      "side": "block/oak_planks"
+    }
+  },
+  "variants": {
+    "north": {
+      "true": {
+        "submodel": "titanium:block/vertical_slab_north",
+        "textures": {
+          "bottom": "block/oak_planks",
+          "top": "block/oak_planks",
+          "side": "block/oak_planks"
+        }
+      },
+      "false": {
+      }
+    },
+    "south": {
+      "true": {
+        "submodel": "titanium:block/vertical_slab_south",
+        "textures": {
+          "bottom": "block/oak_planks",
+          "top": "block/oak_planks",
+          "side": "block/oak_planks"
+        }
+      },
+      "false": {
+      }
+    },
+    "east": {
+      "true": {
+        "submodel": "titanium:block/vertical_slab_east",
+        "textures": {
+          "bottom": "block/oak_planks",
+          "top": "block/oak_planks",
+          "side": "block/oak_planks"
+        }
+      },
+      "false": {
+      }
+    },
+    "west": {
+      "true": {
+        "submodel": "titanium:block/vertical_slab_west",
+        "textures": {
+          "bottom": "block/oak_planks",
+          "top": "block/oak_planks",
+          "side": "block/oak_planks"
+        }
+      },
+      "false": {
+      }
+    }
+  }
+}

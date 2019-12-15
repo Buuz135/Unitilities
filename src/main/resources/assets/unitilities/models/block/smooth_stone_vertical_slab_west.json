@@ -1,0 +1,9 @@
+{
+  "parent": "unitilities:block/vertical_slab_west",
+  "textures": {
+    "particle": "block/smooth_stone",
+    "side": "block/smooth_stone",
+    "top": "block/smooth_stone",
+    "bottom": "block/smooth_stone"
+  }
+}

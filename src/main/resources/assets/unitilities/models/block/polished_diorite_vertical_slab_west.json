@@ -1,0 +1,9 @@
+{
+  "parent": "unitilities:block/vertical_slab_west",
+  "textures": {
+    "particle": "block/polished_diorite",
+    "side": "block/polished_diorite",
+    "top": "block/polished_diorite",
+    "bottom": "block/polished_diorite"
+  }
+}

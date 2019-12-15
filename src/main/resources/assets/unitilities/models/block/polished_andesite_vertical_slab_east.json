@@ -1,0 +1,9 @@
+{
+  "parent": "unitilities:block/vertical_slab_east",
+  "textures": {
+    "particle": "block/polished_andesite",
+    "side": "block/polished_andesite",
+    "top": "block/polished_andesite",
+    "bottom": "block/polished_andesite"
+  }
+}

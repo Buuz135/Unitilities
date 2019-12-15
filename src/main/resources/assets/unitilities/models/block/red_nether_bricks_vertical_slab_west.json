@@ -1,0 +1,9 @@
+{
+  "parent": "unitilities:block/vertical_slab_west",
+  "textures": {
+    "particle": "block/red_nether_bricks",
+    "side": "block/red_nether_bricks",
+    "top": "block/red_nether_bricks",
+    "bottom": "block/red_nether_bricks"
+  }
+}

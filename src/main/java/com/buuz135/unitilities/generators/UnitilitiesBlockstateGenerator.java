@@ -13,7 +13,7 @@ import java.util.Collection;
 public class UnitilitiesBlockstateGenerator extends BlockStateProvider {
 
     public UnitilitiesBlockstateGenerator(DataGenerator gen, ExistingFileHelper exFileHelper) {
-        super(gen, "titanium", exFileHelper);
+        super(gen, "unitilities", exFileHelper);
     }
 
     @Override
@@ -21,23 +21,27 @@ public class UnitilitiesBlockstateGenerator extends BlockStateProvider {
         ResourceRegistry.getMaterials().stream().map(material -> material.getGenerated().values()).flatMap(Collection::stream).filter(entry -> entry instanceof ResourceVerticalSlabBlock)
                 .map(entry -> (ResourceVerticalSlabBlock) entry).forEach(resourceVerticalSlabBlock -> {
             getVariantBuilder(resourceVerticalSlabBlock)
-                    .forAllStatesExcept(state -> {
-                        ConfiguredModel.Builder builder = ConfiguredModel.builder();
-
-                        return builder.build();
-                    }, ResourceVerticalSlabBlock.WATERLOGGED)
-                    .partialState().with(ResourceVerticalSlabBlock.NORTH, true)
-                    .addModels(new ConfiguredModel(getBuilder(resourceVerticalSlabBlock.getRegistryName().getPath()).parent(new ModelFile.UncheckedModelFile("titanium:block/vertical_slab_north"))
-                            .texture("side", resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())))
-                    .partialState().with(ResourceVerticalSlabBlock.SOUTH, true)
-                    .addModels(new ConfiguredModel(getBuilder(resourceVerticalSlabBlock.getRegistryName().getPath()).parent(new ModelFile.UncheckedModelFile("titanium:block/vertical_slab_south"))
-                            .texture("side", resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())))
-                    .partialState().with(ResourceVerticalSlabBlock.EAST, true)
-                    .addModels(new ConfiguredModel(getBuilder(resourceVerticalSlabBlock.getRegistryName().getPath()).parent(new ModelFile.UncheckedModelFile("titanium:block/vertical_slab_east"))
-                            .texture("side", resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())))
-                    .partialState().with(ResourceVerticalSlabBlock.WEST, true)
-                    .addModels(new ConfiguredModel(getBuilder(resourceVerticalSlabBlock.getRegistryName().getPath()).parent(new ModelFile.UncheckedModelFile("titanium:block/vertical_slab_west"))
-                            .texture("side", resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())))
+                    .partialState().with(ResourceVerticalSlabBlock.TYPE, ResourceVerticalSlabBlock.VerticalHalf.DOUBLE).addModels(new ConfiguredModel(new ModelFile.UncheckedModelFile(resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())))
+                    .partialState().with(ResourceVerticalSlabBlock.AXIS, ResourceVerticalSlabBlock.Axis.Z).with(ResourceVerticalSlabBlock.TYPE, ResourceVerticalSlabBlock.VerticalHalf.TOP).addModels(new ConfiguredModel(getBuilder(resourceVerticalSlabBlock.getRegistryName().getPath().toString() + "_north").parent(new ModelFile.UncheckedModelFile("unitilities:block/vertical_slab_north"))
+                    .texture("particle", resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())
+                    .texture("side", resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())
+                    .texture("top", resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())
+                    .texture("bottom", resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())))
+                    .partialState().with(ResourceVerticalSlabBlock.AXIS, ResourceVerticalSlabBlock.Axis.Z).with(ResourceVerticalSlabBlock.TYPE, ResourceVerticalSlabBlock.VerticalHalf.BOTTOM).addModels(new ConfiguredModel(getBuilder(resourceVerticalSlabBlock.getRegistryName().getPath().toString() + "_south").parent(new ModelFile.UncheckedModelFile("unitilities:block/vertical_slab_south"))
+                    .texture("particle", resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())
+                    .texture("side", resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())
+                    .texture("top", resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())
+                    .texture("bottom", resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())))
+                    .partialState().with(ResourceVerticalSlabBlock.AXIS, ResourceVerticalSlabBlock.Axis.X).with(ResourceVerticalSlabBlock.TYPE, ResourceVerticalSlabBlock.VerticalHalf.BOTTOM).addModels(new ConfiguredModel(getBuilder(resourceVerticalSlabBlock.getRegistryName().getPath().toString() + "_east").parent(new ModelFile.UncheckedModelFile("unitilities:block/vertical_slab_east"))
+                    .texture("particle", resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())
+                    .texture("side", resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())
+                    .texture("top", resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())
+                    .texture("bottom", resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())))
+                    .partialState().with(ResourceVerticalSlabBlock.AXIS, ResourceVerticalSlabBlock.Axis.X).with(ResourceVerticalSlabBlock.TYPE, ResourceVerticalSlabBlock.VerticalHalf.TOP).addModels(new ConfiguredModel(getBuilder(resourceVerticalSlabBlock.getRegistryName().getPath().toString() + "_west").parent(new ModelFile.UncheckedModelFile("unitilities:block/vertical_slab_west"))
+                    .texture("particle", resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())
+                    .texture("side", resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())
+                    .texture("top", resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())
+                    .texture("bottom", resourceVerticalSlabBlock.getParent().getRegistryName().getNamespace() + ":block/" + resourceVerticalSlabBlock.getParent().getRegistryName().getPath())))
             ;
         });
     }

@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
 public class VerticalSlabResourceType implements IResourceType {
     @Override
     public String getTag() {
-        return null;
+        return "vertical_slab";
     }
 
     @Override

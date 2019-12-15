@@ -1,0 +1,9 @@
+{
+  "parent": "unitilities:block/vertical_slab_north",
+  "textures": {
+    "particle": "block/purpur_block",
+    "side": "block/purpur_block",
+    "top": "block/purpur_block",
+    "bottom": "block/purpur_block"
+  }
+}

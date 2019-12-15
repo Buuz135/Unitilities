@@ -1,0 +1,9 @@
+{
+  "parent": "unitilities:block/vertical_slab_west",
+  "textures": {
+    "particle": "block/jungle_planks",
+    "side": "block/jungle_planks",
+    "top": "block/jungle_planks",
+    "bottom": "block/jungle_planks"
+  }
+}

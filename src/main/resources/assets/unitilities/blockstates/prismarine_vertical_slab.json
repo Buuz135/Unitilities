@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "axis=x,type=top": {
+      "model": "unitilities:block/prismarine_vertical_slab_west"
+    },
+    "axis=z,type=top": {
+      "model": "unitilities:block/prismarine_vertical_slab_north"
+    },
+    "axis=x,type=bottom": {
+      "model": "unitilities:block/prismarine_vertical_slab_east"
+    },
+    "axis=z,type=bottom": {
+      "model": "unitilities:block/prismarine_vertical_slab_south"
+    },
+    "type=double": {
+      "model": "minecraft:block/prismarine"
+    }
+  }
+}

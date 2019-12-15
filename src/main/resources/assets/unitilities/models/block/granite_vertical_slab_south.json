@@ -1,0 +1,9 @@
+{
+  "parent": "unitilities:block/vertical_slab_south",
+  "textures": {
+    "particle": "block/granite",
+    "side": "block/granite",
+    "top": "block/granite",
+    "bottom": "block/granite"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "unitilities:block/vertical_slab_north",
+  "textures": {
+    "particle": "block/dark_prismarine",
+    "side": "block/dark_prismarine",
+    "top": "block/dark_prismarine",
+    "bottom": "block/dark_prismarine"
+  }
+}

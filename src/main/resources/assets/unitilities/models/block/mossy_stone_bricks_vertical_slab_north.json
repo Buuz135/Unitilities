@@ -1,0 +1,9 @@
+{
+  "parent": "unitilities:block/vertical_slab_north",
+  "textures": {
+    "particle": "block/mossy_stone_bricks",
+    "side": "block/mossy_stone_bricks",
+    "top": "block/mossy_stone_bricks",
+    "bottom": "block/mossy_stone_bricks"
+  }
+}

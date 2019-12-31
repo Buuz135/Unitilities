@@ -72,7 +72,7 @@ public class ResourceVerticalSlabBlock extends BlockBase implements IResourceHol
     }
 
     public static VerticalHalf getFacingHit(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
-        if (player.isSneaking()) return VerticalHalf.DOUBLE;
+        if (player.isCrouching()) return VerticalHalf.DOUBLE;
         RayTraceResult result = RayTraceUtils.rayTraceSimple(worldIn, player, 32, 0);
         if (result instanceof BlockRayTraceResult) {
             VoxelShape hit = RayTraceUtils.rayTraceVoxelShape((BlockRayTraceResult) result, worldIn, player, 32, 0);
@@ -100,9 +100,11 @@ public class ResourceVerticalSlabBlock extends BlockBase implements IResourceHol
         if (blockstate.getBlock() == this && blockstate.get(TYPE) != VerticalHalf.DOUBLE) {
             return blockstate.with(TYPE, VerticalHalf.DOUBLE).with(WATERLOGGED, false);
         }
-        Direction[] adirection = context.getNearestLookingDirections();
-        if (adirection.length > 0) {
-            return this.getDefaultState().with(TYPE, adirection[0].getAxisDirection() == Direction.AxisDirection.POSITIVE ? VerticalHalf.BOTTOM : VerticalHalf.TOP).with(AXIS, adirection[0].getAxis() == Direction.Axis.X ? Axis.X : Axis.Z).with(WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER);
+        if (context.getFace().getAxis().isHorizontal()) {
+            Direction[] adirection = context.getNearestLookingDirections();
+            if (adirection.length > 0) {
+                return this.getDefaultState().with(TYPE, adirection[0].getAxisDirection() == Direction.AxisDirection.POSITIVE ? VerticalHalf.BOTTOM : VerticalHalf.TOP).with(AXIS, adirection[0].getAxis() == Direction.Axis.X ? Axis.X : Axis.Z).with(WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER);
+            }
         }
         return this.getDefaultState().with(TYPE, context.getPlacementHorizontalFacing().getAxisDirection() == Direction.AxisDirection.POSITIVE ? VerticalHalf.BOTTOM : VerticalHalf.TOP).with(AXIS, context.getPlacementHorizontalFacing().getAxis() == Direction.Axis.X ? Axis.X : Axis.Z).with(WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER);
     }

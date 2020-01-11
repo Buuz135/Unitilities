@@ -2,7 +2,7 @@ package com.buuz135.unitilities.decorative.vertical;
 
 import com.hrznstudio.titanium.api.material.IResourceHolder;
 import com.hrznstudio.titanium.api.material.IResourceType;
-import com.hrznstudio.titanium.block.BlockBase;
+import com.hrznstudio.titanium.block.BasicBlock;
 import com.hrznstudio.titanium.material.ResourceMaterial;
 import com.hrznstudio.titanium.material.ResourceTypeProperties;
 import com.hrznstudio.titanium.util.RayTraceUtils;
@@ -38,7 +38,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResourceVerticalSlabBlock extends BlockBase implements IResourceHolder, IWaterLoggable {
+public class ResourceVerticalSlabBlock extends BasicBlock implements IResourceHolder, IWaterLoggable {
 
     public static final EnumProperty<VerticalHalf> TYPE = EnumProperty.create("type", VerticalHalf.class);
     public static final EnumProperty<Axis> AXIS = EnumProperty.create("axis", Axis.class);

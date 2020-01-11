@@ -16,3 +16,7 @@ gradle-app.setting
 /run/
 /gradle/wrapper/
 /src/main/resources/assets/minecraft/textures/block/
+/src/main/resources/assets/minecraft/textures/block/quartz_block.png
+/src/main/resources/assets/minecraft/textures/block/smooth_quartz.png
+/src/main/resources/assets/minecraft/textures/block/smooth_red_sandstone.png
+/src/main/resources/assets/minecraft/textures/block/smooth_sandstone.png

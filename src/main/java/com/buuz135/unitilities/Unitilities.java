@@ -1,5 +1,7 @@
 package com.buuz135.unitilities;
 
+import com.buuz135.unitilities.decorative.simple.PillarBlock;
+import com.buuz135.unitilities.decorative.simple.SimpleBlock;
 import com.buuz135.unitilities.decorative.vertical.ResourceVerticalSlabBlock;
 import com.buuz135.unitilities.decorative.vertical.VerticalSlabResourceType;
 import com.buuz135.unitilities.generators.UnitilitiesBlockstateGenerator;
@@ -8,7 +10,10 @@ import com.buuz135.unitilities.generators.UnitilitiesLanguageGenerator;
 import com.buuz135.unitilities.generators.UnitilitiesRecipeGenerator;
 import com.hrznstudio.titanium.event.handler.EventManager;
 import com.hrznstudio.titanium.material.ResourceRegistry;
+import com.hrznstudio.titanium.module.Feature;
+import com.hrznstudio.titanium.module.Module;
 import com.hrznstudio.titanium.module.ModuleController;
+import com.hrznstudio.titanium.tab.TitaniumTab;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.inventory.InventoryHelper;
@@ -26,6 +31,8 @@ public class Unitilities extends ModuleController {
 
     private static final Logger LOGGER = LogManager.getLogger();
     public static VerticalSlabResourceType VERTICAL_SLAB = new VerticalSlabResourceType();
+
+    public static TitaniumTab TAB = new TitaniumTab("unitilities", () -> new ItemStack(Blocks.STONE));
 
     static {
         for (Block block : new Block[]{Blocks.OAK_PLANKS, Blocks.ACACIA_PLANKS, Blocks.SPRUCE_PLANKS, Blocks.BIRCH_PLANKS, Blocks.DARK_OAK_PLANKS, Blocks.JUNGLE_PLANKS, Blocks.STONE, Blocks.SMOOTH_STONE, Blocks.SANDSTONE, Blocks.SMOOTH_SANDSTONE, Blocks.CUT_SANDSTONE, Blocks.COBBLESTONE, Blocks.BRICKS,
@@ -58,7 +65,16 @@ public class Unitilities extends ModuleController {
 
     @Override
     protected void initModules() {
-
+        Module.Builder module = Module.builder("decoration");
+        Feature.Builder feature = Feature.builder("basic");
+        for (int i = 0; i < 32; i++) {
+            feature.content(Block.class, new SimpleBlock("decorative_" + i, Block.Properties.from(Blocks.STONE)));
+        }
+        for (int i = 0; i < 16; i++) {
+            feature.content(Block.class, new PillarBlock("decorative_pillar_" + i, Block.Properties.from(Blocks.STONE)));
+        }
+        module.feature(feature);
+        addModule(module);
     }
 
     private void setup(final FMLCommonSetupEvent event) {

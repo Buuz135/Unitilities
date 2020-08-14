@@ -21,7 +21,7 @@ public class VerticalSlabResourceType implements IResourceType {
     }
 
     @Override
-    public String getName() {
+    public String getString() {
         return "vertical_slab";
     }
 

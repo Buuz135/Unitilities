@@ -1,8 +1,8 @@
 package com.buuz135.unitilities.decorative.vertical;
 
+import com.buuz135.unitilities.decorative.simple.SimpleBlock;
 import com.hrznstudio.titanium.api.material.IResourceHolder;
 import com.hrznstudio.titanium.api.material.IResourceType;
-import com.hrznstudio.titanium.block.BasicBlock;
 import com.hrznstudio.titanium.material.ResourceMaterial;
 import com.hrznstudio.titanium.material.ResourceTypeProperties;
 import com.hrznstudio.titanium.util.RayTraceUtils;
@@ -12,8 +12,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
@@ -38,7 +38,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResourceVerticalSlabBlock extends BasicBlock implements IResourceHolder, IWaterLoggable {
+public class ResourceVerticalSlabBlock extends SimpleBlock implements IResourceHolder, IWaterLoggable {
 
     public static final EnumProperty<VerticalHalf> TYPE = EnumProperty.create("type", VerticalHalf.class);
     public static final EnumProperty<Axis> AXIS = EnumProperty.create("axis", Axis.class);
@@ -54,7 +54,7 @@ public class ResourceVerticalSlabBlock extends BasicBlock implements IResourceHo
     private final Block parent;
 
     public ResourceVerticalSlabBlock(ResourceMaterial resourceMaterial, IResourceType resourceType, ResourceTypeProperties<Properties> properties) {
-        super("unitilities:" + resourceMaterial.getMaterialType() + "_" + resourceType.getName(), properties == null ? (Properties) ((ResourceTypeProperties) ResourceTypeProperties.DEFAULTS.get(Block.class)).get() : (Properties) properties.get());
+        super("unitilities:" + resourceMaterial.getMaterialType() + "_" + resourceType.getString(), properties == null ? (Properties) ((ResourceTypeProperties) ResourceTypeProperties.DEFAULTS.get(Block.class)).get() : (Properties) properties.get());
         this.resourceMaterial = resourceMaterial;
         this.resourceType = resourceType;
         this.parent = properties instanceof VerticalSlabResourceType.Properties ? ((VerticalSlabResourceType.Properties) properties).getParent() : Blocks.STONE;
@@ -96,7 +96,7 @@ public class ResourceVerticalSlabBlock extends BasicBlock implements IResourceHo
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         BlockPos blockpos = context.getPos();
         BlockState blockstate = context.getWorld().getBlockState(blockpos);
-        IFluidState ifluidstate = context.getWorld().getFluidState(blockpos);
+        FluidState ifluidstate = context.getWorld().getFluidState(blockpos);
         if (blockstate.getBlock() == this && blockstate.get(TYPE) != VerticalHalf.DOUBLE) {
             return blockstate.with(TYPE, VerticalHalf.DOUBLE).with(WATERLOGGED, false);
         }
@@ -170,11 +170,11 @@ public class ResourceVerticalSlabBlock extends BasicBlock implements IResourceHo
         return shapes;
     }
 
-    public IFluidState getFluidState(BlockState state) {
+    public FluidState getFluidState(BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
     }
 
-    public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, IFluidState fluidStateIn) {
+    public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
         return state.get(TYPE) != VerticalHalf.DOUBLE ? IWaterLoggable.super.receiveFluid(worldIn, pos, state, fluidStateIn) : false;
     }
 
@@ -203,7 +203,6 @@ public class ResourceVerticalSlabBlock extends BasicBlock implements IResourceHo
     public enum VerticalHalf implements IStringSerializable {
         TOP, BOTTOM, DOUBLE;
 
-        @Override
         public String getName() {
             return this.toString();
         }
@@ -212,12 +211,16 @@ public class ResourceVerticalSlabBlock extends BasicBlock implements IResourceHo
         public String toString() {
             return super.toString().toLowerCase();
         }
+
+        @Override
+        public String getString() {
+            return this.toString();
+        }
     }
 
     public enum Axis implements IStringSerializable {
         X, Z;
 
-        @Override
         public String getName() {
             return this.toString().toLowerCase();
         }
@@ -225,6 +228,11 @@ public class ResourceVerticalSlabBlock extends BasicBlock implements IResourceHo
         @Override
         public String toString() {
             return super.toString().toLowerCase();
+        }
+
+        @Override
+        public String getString() {
+            return this.toString();
         }
     }
 }

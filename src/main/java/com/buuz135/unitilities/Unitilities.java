@@ -18,6 +18,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -46,19 +47,19 @@ public class Unitilities extends ModuleController {
         EventManager.forge(BlockEvent.BreakEvent.class).filter(event -> event.getState().getBlock() instanceof ResourceVerticalSlabBlock).
                 process(event -> {
                     if (event.getState().get(ResourceVerticalSlabBlock.TYPE) == ResourceVerticalSlabBlock.VerticalHalf.DOUBLE) {
-                        ResourceVerticalSlabBlock.VerticalHalf half = ResourceVerticalSlabBlock.getFacingHit(event.getState(), event.getWorld().getWorld(), event.getPos(), event.getPlayer());
+                        ResourceVerticalSlabBlock.VerticalHalf half = ResourceVerticalSlabBlock.getFacingHit(event.getState(), (World) event.getWorld(), event.getPos(), event.getPlayer());
                         ItemStack stack = ItemStack.EMPTY;
                         if (half == ResourceVerticalSlabBlock.VerticalHalf.DOUBLE) {
                             stack = new ItemStack(event.getState().getBlock(), 2);
                         } else {
                             stack = new ItemStack(event.getState().getBlock(), 1);
                             event.setCanceled(true);
-                            event.getWorld().getWorld().setBlockState(event.getPos(), event.getState().with(ResourceVerticalSlabBlock.TYPE, half == ResourceVerticalSlabBlock.VerticalHalf.TOP ? ResourceVerticalSlabBlock.VerticalHalf.BOTTOM : ResourceVerticalSlabBlock.VerticalHalf.TOP));
+                            event.getWorld().setBlockState(event.getPos(), event.getState().with(ResourceVerticalSlabBlock.TYPE, half == ResourceVerticalSlabBlock.VerticalHalf.TOP ? ResourceVerticalSlabBlock.VerticalHalf.BOTTOM : ResourceVerticalSlabBlock.VerticalHalf.TOP), 0);
                         }
                         if (!event.getPlayer().isCreative())
-                            InventoryHelper.spawnItemStack(event.getWorld().getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), stack);
+                            InventoryHelper.spawnItemStack((World) event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), stack);
                     } else if (!event.getPlayer().isCreative()) {
-                        InventoryHelper.spawnItemStack(event.getWorld().getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), new ItemStack(event.getState().getBlock(), 1));
+                        InventoryHelper.spawnItemStack((World) event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), new ItemStack(event.getState().getBlock(), 1));
                     }
                 }).subscribe();
     }

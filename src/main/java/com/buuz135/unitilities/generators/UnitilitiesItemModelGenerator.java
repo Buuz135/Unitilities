@@ -3,9 +3,9 @@ package com.buuz135.unitilities.generators;
 import com.buuz135.unitilities.decorative.vertical.ResourceVerticalSlabBlock;
 import com.hrznstudio.titanium.material.ResourceRegistry;
 import net.minecraft.data.DataGenerator;
-import net.minecraftforge.client.model.generators.ExistingFileHelper;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.Collection;
 
